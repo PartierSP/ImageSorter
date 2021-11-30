@@ -1,0 +1,59 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  Move(0,0,483,378)
+  #Scaled = False
+  Resizable = False
+  { DC_Source DirChooser
+    Move(7,35,231,252)
+  }
+  { DC_Out DirChooser
+    Move(245,35,231,252)
+  }
+  { Label1 Label
+    Move(7,7,210,28)
+    Text = ("Source Directory")
+  }
+  { Label2 Label
+    Move(245,7,210,21)
+    Text = ("Output Directory")
+  }
+  { CB_Cascade CheckBox
+    Move(14,294,203,28)
+    Text = ("Cascade Directories")
+  }
+  { CB_Move CheckBox
+    Move(245,294,203,28)
+    Text = ("Use Symbolic Links")
+  }
+  { Bt_Doit Button
+    Move(343,329,126,35)
+    Enabled = False
+    Text = ("Copy")
+  }
+  { Bt_Close Button
+    Move(203,329,126,35)
+    Text = Shortcut(("Close"), "C")
+  }
+  { LCDCopy LCDLabel
+    Move(14,336,49,21)
+  }
+  { Label3 Label
+    Move(14,322,42,14)
+    Text = ("Copied")
+  }
+  { Label4 Label
+    Move(84,322,49,14)
+    Text = ("Skipped")
+  }
+  { LCDSkip LCDLabel
+    Move(84,336,49,21)
+  }
+  { Label5 Label
+    Move(147,322,56,14)
+    Text = ("Errors")
+  }
+  { LCDError LCDLabel
+    Move(147,336,49,21)
+  }
+}
