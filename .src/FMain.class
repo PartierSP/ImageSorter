@@ -18,13 +18,13 @@ End
 
 Public Sub DC_Source_Change()
 
-  If DC_Source.Value == DC_Out.Value Then
+  If DC_Source.Value = DC_Out.Value Then
     Bt_Doit.Enabled = False
   Else
     Bt_Doit.Enabled = True
   Endif
   
-  If InStr(DC_Out.Value, DC_Source.Value) == 1 Then
+  If InStr(DC_Out.Value, DC_Source.Value) = 1 Then
     CB_Cascade.Enabled = False
   Else
     CB_Cascade.Enabled = True
@@ -34,13 +34,13 @@ End
 
 Public Sub DC_Out_Change()
 
-  If DC_Source.Value == DC_Out.Value Then
+  If DC_Source.Value = DC_Out.Value Then
     Bt_Doit.Enabled = False
   Else
     Bt_Doit.Enabled = True
   Endif
 
-  If InStr(DC_Out.Value, DC_Source.Value) == 1 Then
+  If InStr(DC_Out.Value, DC_Source.Value) = 1 Then
     CB_Cascade.Enabled = False
   Else
     CB_Cascade.Enabled = True
@@ -58,7 +58,7 @@ Public Function ImageSort(sDir As String)
   Dim sDay As String
   Dim sDirName As String
   
-  If CB_Cascade.Value == -1 And CB_Cascade.Enabled == True Then
+  If CB_Cascade.Value = -1 And CB_Cascade.Enabled = True Then
     For Each sDirName In Dir(sDir, "*", gb.Directory)
       Debug sDirName
       ImageSort(sDir &/ sDirName)
@@ -69,7 +69,7 @@ Public Function ImageSort(sDir As String)
   
   For Each SFileName In sFiles
     Debug sFileName
-    Shell "exif -t 0x9003 -m " & sDir & "/" & sFileName To sDate
+    Shell "exif -t 0x9003 -m " & sDir &/ sFileName To sDate
     Debug sDate
     If sDate > "" Then
       sYear = Mid(sDate, 1, 4)
@@ -78,27 +78,27 @@ Public Function ImageSort(sDir As String)
     
       Debug sYear & "-" & sMonth & "-" & sDay
 
-      If Exist(DC_Out.Value & "/" & sYear) == False Then
-        Mkdir DC_Out.Value & "/" & sYear
+      If Exist(DC_Out.Value &/ sYear) = False Then
+        Mkdir DC_Out.Value &/ sYear
       Endif 
-      If Exist(DC_Out.Value & "/" & sYear & "/" & sMonth) == False Then
-        Mkdir DC_Out.Value & "/" & sYear & "/" & sMonth
+      If Exist(DC_Out.Value &/ sYear &/ sMonth) = False Then
+        Mkdir DC_Out.Value &/ sYear &/ sMonth
       Endif
-      If Exist(DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay) == False Then
-        Mkdir DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay
+      If Exist(DC_Out.Value &/ sYear &/ sMonth &/ sDay) = False Then
+        Mkdir DC_Out.Value &/ sYear &/ sMonth &/ sDay
       Endif
-      If Exist(DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay & "/" & sFileName) == False Then
+      If Exist(DC_Out.Value &/ sYear &/ sMonth &/ sDay &/ sFileName) = False Then
         If CB_Move.Value = False Then
-          Copy sDir & "/" & sFileName To DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay & "/" & sFileName
+          Copy sDir &/ sFileName To DC_Out.Value &/ sYear &/ sMonth &/ sDay &/ sFileName
         Else
-          Link sDir & "/" & sFileName To DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay & "/" & sFileName
+          Link sDir &/ sFileName To DC_Out.Value &/ sYear &/ sMonth &/ sDay &/ sFileName
         Endif
         LCDCopy.Value += 1
         Wait
       Else
         LCDSkip.Value += 1
         Wait
-        Debug DC_Out.Value & "/" & sYear & "/" & sMonth & "/" & sDay & "/" & sFileName & " already exists."
+        Debug DC_Out.Value &/ sYear &/ sMonth &/ sDay &/ sFileName & " already exists."
       Endif
     Else
       Debug "Error no date found in image " & sFileName
